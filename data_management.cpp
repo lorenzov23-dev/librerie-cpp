@@ -160,46 +160,56 @@ void scrivi_file(vector<string> v)
         o.close();
     }
 
-// //funzione per sostituire il numero di clienti. In testa al file aggiorno il numero di clienti aumentandolo di 1 unità dopo l'inserimento
-// bool sostituisci_una_riga(string nuova_riga)
-//     {
-//         //prima parte, si legge tutto il file in una struttura array vector di stringhe
-//         vector<string> lines;
-//         bool trovata = false;
-//         bool esci = false;
-//         lines = leggi_file();
-//         int i = 0;
-//         int j = 0;
-//         while (i<lines.size()&&!esci)
-//             {
-//                 j=0;
-//                 if(lines[i][j]==MARCATORE_DI_CONFRONTO[j])
-//                     {
-//                         j++;
-//                         if(lines[i][j]==MARCATORE_DI_CONFRONTO[j])
-//                             {
-//                                 j++;
-//                                 if(lines[i][j]==MARCATORE_DI_CONFRONTO[j])
-//                                     {
-//                                         j++;
-//                                         if(lines[i][j]==MARCATORE_DI_CONFRONTO[j])
-//                                             {
-//                                                 j++;
-//                                                 if(lines[i][j]==MARCATORE_DI_CONFRONTO[j])
-//                                                     {
-//                                                         esci = true;
-//                                                         trovata = true;
-//                                                         //cambio la riga
-//                                                         lines[i]=nuova_riga;
-//                                                     }
-//                                             }
-//                                     }
-//                             }
-//                     }
-//                 i++;
-//             }
-//         return trovata;
-//     }
+string ricomponi_stringa_parsata(string vecchia, string nuovo_valore)
+    {
+        int index = 0;
+        index = vecchia.find(":");
+        vecchia.erase(index+2, vecchia.length());
+        vecchia.append(nuovo_valore);
+        return vecchia;
+    }
+//funzione per sostituire il numero di clienti. In testa al file aggiorno il numero di clienti aumentandolo di 1 unità dopo l'inserimento
+//preso in ingresso un vector string cerco la o le righe da sostituire
+vector<string> sostituisci_una_riga(vector<string> g, string marcatore, string precedente, string nuovo)
+    {
+        
+        //primmarcatore pmarcatorerte, si legge tutto il file in unmarcatore struttura array vector di stringhe
+        bool trovata = false;
+        bool esci = false;
+        string utile;
+        int i = 0;
+        int j = 0;
+        while ((i<g.size())&&(!esci))
+            {
+                //primo check, controllo la prima parte della riga
+                j=0;
+                if(g[i][j]==marcatore[j])
+                    {
+                        j++;
+                        if(g[i][j]==marcatore[j])
+                            {
+                                j++;
+                                if(g[i][j]==marcatore[j])
+                                    {
+                                        j++;
+                                        if(g[i][j]==marcatore[j])
+                                            {
+                                                utile = parser_scarta_inutile(g[i]);
+                                                //ho messo il valore da correggere nella stringa utile
+                                                if(utile==precedente)
+                                                    {
+                                                        utile = nuovo;
+                                                        g[i] = ricomponi_stringa_parsata(g[i], utile);
+                                                        esci = true;
+                                                    }
+                                            }
+                                    }
+                            }
+                    }
+                i++;
+            }
+        return g;
+    }
 
 // Una semplice funzione che stampa a video tutto il contenuto di un vector
 void stampa_vector(vector<string> da_stampare)
@@ -463,23 +473,16 @@ vector<string> leggi_file()
             }
         in.clear();
         in.close();
-        return mappa;
+        return lettura;
     }
 
-vector<string> cerca(vector<string> v, int chiave)
+void stampa_su_file(vector<string> a, string path)
     {
-        int index = 0;
-        string comparable;
-        if(chiave == 0)
+        ofstream o (path, ios_base::out);
+        while(!a.empty())
             {
-                //cerco per nome
-                while(i< v.size())
-                    {
-                        comparable = v[i].substr(0,3);
-                        if(comparable == MARCATORE_NOME)
-                            {
-                                
-                            }
-                    }
+                o << a[0];
+                a.pop_back();
             }
+        return;
     }

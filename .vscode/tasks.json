@@ -21,7 +21,30 @@
                 "isDefault": true
             },
             "detail": "Attività generata dal debugger."
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++ compila il file attivo",
+            "command": "C:\\Users\\loren\\Compilatori\\bin\\g++.exe",
+            "args": [
+                "-g",
+                "*.cpp",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Attività generata dal debugger."
         }
+
     ],
     "version": "2.0.0"
 }

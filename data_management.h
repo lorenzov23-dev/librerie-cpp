@@ -23,9 +23,17 @@ using namespace std;
 #define PERCORSO_FILE_CLIENTI "test.txt"
 #define PERCORSO_FILE_ABBONAMENTI "percorso"
 #define MARCATORE_DI_CONFRONTO "marcatore: batistuta"
-#define MARCATORE_NOME "Nome"
-#define MARCATORE_COGNOME "Cogn"
-#define MARCATORE_CODICEF "Codi"
+#define MARCATORE_NOME "nome"
+#define MARCATORE_COGNOME "cognome"
+#define MARCATORE_CODICEF "codice-fiscale"
+#define MARCATORE_CAP "C.A.P."
+#define MARCATORE_INDIRIZZO "indirizzo"
+#define MARCATORE_EMAIL "email"
+#define MARCATORE_COMU "comune"
+#define MARCATORE_PROV "provincia"
+
+
+
 
 
 //definisco un metodo per scrivere le stringhe su char array, mi servirà per inserire i comandi nella funzione system
@@ -48,10 +56,11 @@ int converti_num_string_to_int(string num);
 void scrivi_file(vector<string> v);
 
 //creo una funzione che legge un file dentro un array di stringhe e lo restituisce al chiamante
-map<string, string> leggi_file();
+vector<string> leggi_file();
 
 //funzione per sostituire il numero di clienti. In testa al file aggiorno il numero di clienti aumentandolo di 1 unità dopo l'inserimento
-bool sostituisci_una_riga(string n);
+//preso in ingresso un vector string cerco la o le righe da sostituire
+vector<string> sostituisci_una_riga(vector<string> g, string marcatore, string precedente, string nuovo);
 
 // Una semplice funzione che stampa a video tutto il contenuto di un vector
 void stampa_vector(vector<string> da_stampare);
@@ -64,15 +73,4 @@ bool cerca_cliente();
 
 void format_data(char *p, int size);
 
-
-
-
-
-
-
-
-
-
-
-
-
+void stampa_su_file(vector<string> a, string path);
