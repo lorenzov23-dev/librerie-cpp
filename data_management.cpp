@@ -492,3 +492,17 @@ void stampa_su_file(vector<string> a, string path)
         o.close();
         return;
     }
+
+string convert_to_case_insensitive(string in)
+    {
+        int i =0;
+        while(i<in.size())
+            {
+                if((in[i]>64)&(in[i]<91))
+                    {
+                        in[i] = in[i]+32;
+                    }
+                i++;
+            }
+        return in;
+    }
