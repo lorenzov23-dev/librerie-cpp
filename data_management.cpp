@@ -478,11 +478,17 @@ vector<string> leggi_file()
 
 void stampa_su_file(vector<string> a, string path)
     {
-        ofstream o (path, ios_base::out);
-        while(!a.empty())
+        size_t index = 0;
+        int j = 0;
+        ofstream o;
+        o.open(path, ios_base::out);
+        for (size_t i = 0; i < a.size(); ++i)
             {
-                o << a[0];
-                a.pop_back();
+                j = (int) i;
+                o<< a[j] << endl;
             }
+        o.flush();
+        o.clear();
+        o.close();
         return;
     }
