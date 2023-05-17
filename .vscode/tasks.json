@@ -1,14 +1,29 @@
 {
+    "version": "2.0.0",
     "tasks": [
         {
-            "type": "cppbuild",
-            "label": "C/C++: g++ compila il file attivo",
-            "command": "/usr/bin/g++",
+            "type": "shell",
+            "label": "build",
+            "command": "gcc.exe",
             "args": [
                 "-g",
-                "*.cpp",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "a.exe",
+                "reader.c"
+            ],
+            "problemMatcher": [],
+            "group": "build"
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: gcc.exe compila il file attivo",
+            "command": "C:\\cygwin64\\bin\\gcc.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -22,6 +37,5 @@
             },
             "detail": "Attività generata dal debugger."
         }
-    ],
-    "version": "2.0.0"
+    ]
 }
